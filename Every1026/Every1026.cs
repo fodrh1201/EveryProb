@@ -25,24 +25,6 @@ class Every1026
 		}
 	}
 
-	static int[] MakeOrder(int[] list)
-	{
-		int len = list.Length;
-		int[] order = new int[len];
-
-		for (int i = 1; i < len; i++)
-		{
-			for (int j = 0; j < i; j++)
-			{
-				if (list[j] < list[i])
-					order[i] +=1;
-				else
-					order[j] +=1;
-			}
-		}
-		return order;
-	}
-				
 
 	static void Main()
 	{
@@ -57,14 +39,13 @@ class Every1026
 
 		int[] listA = strA.Select(x => int.Parse(x)).ToArray();
 		int[] listB = strB.Select(x => int.Parse(x)).ToArray();
-		int[] orderB = new int[n];
 
 		InsertionSort(listA);
-		orderB = MakeOrder(listB);
+		InsertionSort(listB);
 
 		for (int i = 0; i < n; i++)
 		{
-			S += listB[i] * listA[n-orderB[i]-1];
+			S += listB[i] * listA[n-i-1];
 		}
 
 		Console.WriteLine(S);
